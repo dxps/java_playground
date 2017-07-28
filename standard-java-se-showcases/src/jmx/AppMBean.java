@@ -7,16 +7,16 @@ package jmx;
  */
 public interface AppMBean {
 
-    /** Set the message of the day (motd). */
-    public void setMotd(String message);
-
     /** Get the message of the day (motd). */
-    public String getMotd();
+    String getMotd();
+
+    /** Update the message of the day (motd). */
+    void updateMotd();
 
     /** Print to standard output the message of the day (motd). */
-    public void printMotd();
+    void printMotd();
 
     /** Tell the application to stop. */
-    public void stop();
+    void stop();
 
 }

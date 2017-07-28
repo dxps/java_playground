@@ -7,18 +7,24 @@ public class App implements AppMBean, Runnable {
 
     private AppConfig config;
 
+    private String baseMessage = "Hello ";
+
+    private int counter;
+
     public App() {
         config = new AppConfig();
     }
 
     @Override
-    public void setMotd(String message) {
-        config.setMotd(message);
+    public String getMotd() {
+        return config.getMotd();
     }
 
     @Override
-    public String getMotd() {
-        return config.getMotd();
+    public void updateMotd() {
+        counter++;
+        config.setMotd(baseMessage + counter);
+        System.out.println(">>> Motd was updated.");
     }
 
     @Override

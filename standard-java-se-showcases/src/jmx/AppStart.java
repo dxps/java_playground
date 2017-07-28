@@ -23,7 +23,7 @@ public class AppStart {
 
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
         try {
-            ObjectName motd = new ObjectName("MYAPP:name=Motd");
+            ObjectName motd = new ObjectName("MOTD:name=Motd");
             mbs.registerMBean(app, motd);
         } catch (Exception e) {
             System.err.println(">>> JMX init error: " + e.getMessage());
