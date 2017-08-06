@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+
+    <Appenders>
+
+        <RollingFile name="mainLog"
+                     fileName="/logs/apps/standalone-embedded-jetty-rest/standalone-embedded-jetty-rest.log"
+                     filePattern="/logs/apps/standalone-embedded-jetty-rest/standalone-embedded-jetty-rest-%i.log">
+            <PatternLayout pattern="%-24d{yyyy-MM-dd HH:mm:ss,SSS} %-6p %-22c{1} %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="5 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="4"/>
+        </RollingFile>
+
+        <RollingFile name="frameworksLog"
+                     fileName="/logs/apps/standalone-embedded-jetty-rest/standalone-embedded-jetty-rest-frameworks.log"
+                     filePattern="/logs/apps/standalone-embedded-jetty-rest/standalone-embedded-jetty-rest-frameworks-%i.log">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss,SSS} %-6p %-48c %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="2 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="2"/>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="info" additivity="false">
+            <AppenderRef ref="frameworksLog" />
+        </Root>
+
+        <Logger name="tech.vision8.embjetty.app" additivity="false" level="debug">
+            <AppenderRef ref="mainLog" />
+        </Logger>
+
+        <Logger name="org.eclipse.jetty.server" additivity="false">
+            <AppenderRef ref="frameworksLog" />
+        </Logger>
+        <Logger name="org.eclipse.jetty.webapp" additivity="false">
+            <AppenderRef ref="frameworksLog" />
+        </Logger>
+        <Logger name="org.eclipse.jetty.util.log" additivity="false">
+            <AppenderRef ref="frameworksLog" />
+        </Logger>
+
+        <Logger name="org.quartz" additivity="false">
+            <AppenderRef ref="frameworksLog" />
+        </Logger>
+        <Logger name="com.mchange.v2" additivity="false">
+            <AppenderRef ref="frameworksLog" />
+        </Logger>
+
+        <Logger name="org.jboss.resteasy.spi" additivity="false" level="info">
+            <AppenderRef ref="frameworksLog" />
+        </Logger>
+
+    </Loggers>
+
+</Configuration>
