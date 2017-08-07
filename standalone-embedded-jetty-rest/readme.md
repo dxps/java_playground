@@ -19,7 +19,7 @@ For the scope of this sample, just having an `index.html` file and a `WEB-INF/we
 ## Start & Play
 
 - Run `tech.vision8.embjetty.app.run.EmbJettyAppStart`
-- Homepage of the app is available at `http://localhost:8787`. This is actually the `index.html` file, present in the webapp directory.
+- Homepage of the app is available at `http://localhost:8787` whose content is actually the `index.html` file, present in the webapp directory.
 - REST services are accessible at `/api/<resource-name>`.
 - `Salutation` resource is exposed by two operations:
      - A GET to /text (`http://localhost:8787/api/hello/text`) to get the String/text version
