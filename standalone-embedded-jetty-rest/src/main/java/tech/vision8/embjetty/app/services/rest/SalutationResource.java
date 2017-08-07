@@ -17,7 +17,7 @@ import java.util.Date;
 @Path("/hello")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-class SalutationResource {
+public class SalutationResource {
 
     private static final Logger log = LoggerFactory.getLogger(SalutationResource.class);
 
