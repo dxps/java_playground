@@ -22,11 +22,18 @@ public class AppResource {
     // and expose it to the external world through two REST operations:
     //
     // - a GET /api/app 
-    //   this operation should return the uptime in a JSON format
+    //   this operation should return the app state that includes
+    //   the start time and uptime in a JSON format. Example:
+    //    {
+    //        "startTime": "2017-08-07T19:00:00.854Z", 
+    //       "uptime": "1h 8m 29.258s"
+    //    }
     //
-    // - a POST /api/app 
-    //   this operation should reset the uptime and return the new state in JSON format
-    //   (the same result as the previous operation, but this time with the new uptime)
+    // - a PUT /api/app /startTime
+    //   this operation should update the startTime (stored in AppResource)
+    //   and return the new state in JSON format  (the same result as
+    //   the previous operation, but with the reflected updates)
+    //
     //
     // Get inspired from SalutationResource example included in this package.
     // A utility method named humanReadableFormat is provided to be helpful.
