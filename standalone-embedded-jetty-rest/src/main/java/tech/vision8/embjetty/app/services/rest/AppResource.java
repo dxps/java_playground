@@ -13,7 +13,7 @@ public class AppResource {
 
     private static final Logger log = LoggerFactory.getLogger(AppResource.class);
 
-    public static Instant startTime = Instant.now();
+    private Instant startTime = Instant.now();
 
 
     // TODO: This is part of the REST exercise.
