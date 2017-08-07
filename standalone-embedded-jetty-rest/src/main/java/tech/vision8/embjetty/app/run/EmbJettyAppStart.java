@@ -3,12 +3,16 @@ package tech.vision8.embjetty.app.run;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Instant;
+
 /**
  * @author vision8
  */
 public class EmbJettyAppStart {
 
     private static final Logger log = LoggerFactory.getLogger(EmbJettyAppStart.class);
+
+    public static Instant startTime = Instant.now();
 
     public static void main(String... args) {
 
