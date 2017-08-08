@@ -6,13 +6,13 @@ This is a sample app that can be used at least in the following two use cases:
 
 ## App Structure
 
-The main app components are:
-- The app starts with `EmbJettyAppStarts`.
-- Embedded Jetty specific setup and start is part of `WebAppServer`.
+From an infrastructure point of view, the main app components are:
+- `EmbJettyAppStart` that is used for starting the application.
+- `WebAppServer` for doing the Jetty specific setup and start (programmatically init and start).
 
-The REST services are implemented using Rest Easy library. `RestApplication` is responsible with the initialization of the `Resource`s that are exposed through REST operations.
+The REST services are implemented using RESTEasy library. `RestApplication` is responsible with the initialization of the `Resource`s that are exposed through REST operations.
 
-At the project root there is also an `/webapp` directory whose structure follows the standard Java Web application structure.
+At the project root there is also an `webapp` directory whose structure follows the classic Java Web application structure.
 
 For the scope of this sample, just having an `index.html` file and a `WEB-INF/web.xml` deployment descriptior is more than enough.
 
