@@ -1,4 +1,4 @@
-package annotations.tbd;
+package annotations.ex2;
 
 /**
  * A simple lights class.
