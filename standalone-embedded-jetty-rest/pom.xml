@@ -21,7 +21,7 @@
         <resteasy.async-http-servlet-3.0.version>3.0.19.Final</resteasy.async-http-servlet-3.0.version>
 
         <slf4j-api.version>1.7.25</slf4j-api.version>
-        <log4j.version>2.13.3</log4j.version>
+        <log4j.version>2.16.0</log4j.version>
 
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
