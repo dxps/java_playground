@@ -16,7 +16,7 @@
 
         <jetty.version>9.4.34.v20201102</jetty.version>
 
-        <resteasy.version>4.5.7.Final</resteasy.version>
+        <resteasy.version>4.6.0.Final</resteasy.version>
         <resteasy.jaxrs-api.version>3.0.12.Final</resteasy.jaxrs-api.version>
         <resteasy.async-http-servlet-3.0.version>3.0.19.Final</resteasy.async-http-servlet-3.0.version>
 
