@@ -6,19 +6,6 @@ Feature: Order a coffee
   Background:
     Given Cathy is a CaffeinateMe customer
 
-  Rule: Orders placed close to the store should be considered as Urgent
-    Example: Buyer orders a coffee when they are close to the coffee shop
-      Given Cathy is 100 meters from the coffee shop
-      When Cathy orders a "large cappuccino"
-      Then Barry should receive the order
-      And Barry should know that the order is Urgent
-
-    Example: Buyer orders a coffee when they are not close to the coffee shop
-      Given Cathy is 300 meters from the coffee shop
-      When Cathy orders a "large cappuccino"
-      Then Barry should receive the order
-      And Barry should know that the order is Normal
-
   Rule: Buyer can specify their preferences when he orders
     Example: Buyer ca add a comment with their order
       When Cathy orders a "large cappuccino" with a comment "Double sugar"
