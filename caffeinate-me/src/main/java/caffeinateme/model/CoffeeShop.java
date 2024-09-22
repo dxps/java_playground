@@ -23,4 +23,8 @@ public class CoffeeShop {
                 .findFirst();
     }
 
+    public Customer registerNewCustomer(String customerName) {
+        return new Customer(customerName);
+    }
+
 }
