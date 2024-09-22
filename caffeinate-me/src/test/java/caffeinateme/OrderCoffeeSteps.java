@@ -4,11 +4,16 @@ import caffeinateme.model.CoffeeShop;
 import caffeinateme.model.Customer;
 import caffeinateme.model.Order;
 import caffeinateme.model.OrderStatus;
+import io.cucumber.java.DataTableType;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,7 +31,6 @@ public class OrderCoffeeSteps {
 
     @Given("Cathy is {int} meters from the coffee shop")
     public void cathy_is_n_meters_from_the_coffee_shop(Integer distanceInMeters) {
-
         customer.setDistanceFromShop(distanceInMeters);
     }
 
@@ -62,6 +66,32 @@ public class OrderCoffeeSteps {
     @And("the order should have the comment {string}")
     public void theOrderShouldHaveTheComment(String comment) {
         assertThat(order.getComment()).isEqualTo(comment);
+    }
+
+    @DataTableType
+    public OrderItem orderItem(Map<String, String> row) {
+        return new OrderItem(row.get("Product"), Integer.parseInt(row.get("Quantity")));
+    }
+
+    @When("Cathy places an order for the following items:")
+    public void cathyPlacesAnOrderForTheFollowingItems(List<OrderItem> items) {
+        this.order = new Order(items, customer);
+        coffeeShop.placeOrder(order);
+    }
+
+    @And("the order should contain {int} line items")
+    public void theOrderShouldContainLineItems(int expectedNumberOfLineItems) {
+        var order = coffeeShop.getOrderFor(customer).get();
+        assertThat(order.getItems()).hasSize(expectedNumberOfLineItems);
+    }
+
+    @And("the order should contain the following products:")
+    public void order_should_contain_following_products(List<String> expectedProducts) {
+        var order = coffeeShop.getOrderFor(customer).get();
+        List<String> productItems = order.getItems().stream()
+                .map(OrderItem::product)
+                .collect(Collectors.toList());
+        assertThat(productItems).hasSameElementsAs(expectedProducts);
     }
 
 }

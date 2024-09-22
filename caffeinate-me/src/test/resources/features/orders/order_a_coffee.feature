@@ -25,3 +25,14 @@ Feature: Order a coffee
       Then Barry should receive the order
       And the order should have the comment "Double sugar"
 
+  Rule: Buyer can order many items in the same order
+    Example: Buyer orders two items in an order
+      When Cathy places an order for the following items:
+        | Product          | Quantity |
+        | Large Cappuccino | 1        |
+        | Espresso         | 2        |
+      Then Barry should receive the order
+      And the order should contain 2 line items
+      And the order should contain the following products:
+        | Large Cappuccino |
+        | Espresso         |
