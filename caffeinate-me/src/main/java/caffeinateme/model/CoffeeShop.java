@@ -4,10 +4,18 @@ import java.util.*;
 
 public class CoffeeShop {
 
+    private static final int MAX_DISTANCE = 10000;
+
     private final Queue<Order> orders = new LinkedList<>();
+    private Map<String, Customer> registeredCustomers = new HashMap<>();
+    private final ProductCatalog productCatalog;
+
+    public CoffeeShop(ProductCatalog productCatalog) {
+        this.productCatalog = productCatalog;
+    }
 
     public void placeOrder(Order order) {
-        orders.add(order);
+        placeOrder(order, MAX_DISTANCE);
     }
 
     public void placeOrder(Order order, int distanceInMetres) {
@@ -25,7 +33,7 @@ public class CoffeeShop {
 
     public Optional<Order> getOrderFor(Customer customer) {
         return orders.stream()
-                .filter( order -> order.getCustomer().equals(customer))
+                .filter(order -> order.getCustomer().equals(customer))
                 .findFirst();
     }
 

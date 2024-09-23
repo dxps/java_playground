@@ -1,9 +1,6 @@
 package caffeinateme;
 
-import caffeinateme.model.CoffeeShop;
-import caffeinateme.model.Customer;
-import caffeinateme.model.Order;
-import caffeinateme.model.OrderStatus;
+import caffeinateme.model.*;
 import io.cucumber.java.DataTableType;
 import io.cucumber.java.ParameterType;
 import io.cucumber.java.en.And;
@@ -20,7 +17,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderCoffeeSteps {
 
-    CoffeeShop coffeeShop = new CoffeeShop();
+    ProductCatalog catalog = new ProductCatalog();
+    CoffeeShop coffeeShop = new CoffeeShop(catalog);
     Customer customer;
     Order order;
 
@@ -73,7 +71,10 @@ public class OrderCoffeeSteps {
         return new OrderItem(row.get("Product"), Integer.parseInt(row.get("Quantity")));
     }
 
-    @When("Cathy places an order for the following items:")
+    // These two are left as FYI. The one-liner alternative below uses a regex.
+    // @Given("Cathy has placed an order for the following items:")
+    // @When("Cathy places an order for the following items:")
+    @When("^Cathy (?:has placed|places) an order for the following items:")
     public void cathyPlacesAnOrderForTheFollowingItems(List<OrderItem> items) {
         this.order = new Order(items, customer);
         coffeeShop.placeOrder(order);
@@ -92,6 +93,16 @@ public class OrderCoffeeSteps {
                 .map(OrderItem::product)
                 .collect(Collectors.toList());
         assertThat(productItems).hasSameElementsAs(expectedProducts);
+    }
+
+    @DataTableType
+    public ProductPrice productPrice(Map<String, String> row) {
+        return new ProductPrice(row.get("Product"), Double.parseDouble(row.get("Price")));
+    }
+
+    @Given("the following prices:")
+    public void theFollowingPrices(List<ProductPrice> productPrices) {
+        catalog.addProductsWithPrices(productPrices);
     }
 
 }
