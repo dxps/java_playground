@@ -105,4 +105,11 @@ public class OrderCoffeeSteps {
         catalog.addProductsWithPrices(productPrices);
     }
 
+    Receipt receipt;
+
+    @When("he/she asks for a receipt")
+    public void sheAsksForAReceipt() {
+        receipt = coffeeShop.getReceiptFor(customer);
+    }
+
 }
