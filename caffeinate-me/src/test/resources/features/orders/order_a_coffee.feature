@@ -7,7 +7,7 @@ Feature: Order a coffee
     Given Cathy is a CaffeinateMe customer
 
   Rule: Buyer can specify their preferences when he orders
-    Example: Buyer ca add a comment with their order
+    Example: Buyer can add a comment with their order
       When Cathy orders a "large cappuccino" with a comment "Double sugar"
       Then Barry should receive the order
       And the order should have the comment "Double sugar"

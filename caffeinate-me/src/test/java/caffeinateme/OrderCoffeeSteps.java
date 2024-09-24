@@ -112,4 +112,26 @@ public class OrderCoffeeSteps {
         receipt = coffeeShop.getReceiptFor(customer);
     }
 
+    @Then("she should receive a receipt totalling:")
+    public void sheShouldReceiveAReceiptTotalling(Map<String, Double> receiptTotals) {
+        double serviceFee = receiptTotals.get("Service Fee");
+        double subtotal = receiptTotals.get("Subtotal");
+        double total = receiptTotals.get("Total");
+
+        assertThat(receipt.serviceFee()).isEqualTo(serviceFee);
+        assertThat(receipt.subtotal()).isEqualTo(subtotal);
+        assertThat(receipt.total()).isEqualTo(total);
+    }
+
+    @DataTableType
+    public ReceiptLineItem receiptLineItem(Map<String, String> dataItem) {
+        return new ReceiptLineItem(dataItem.get("Product"),
+                Integer.parseInt(dataItem.get("Quantity")),
+                Double.parseDouble(dataItem.get("Price")));
+    }
+
+    @And("the receipt should contain the line items:")
+    public void theReceiptShouldContainTheLineItems(List<ReceiptLineItem> expectedItems) {
+        assertThat(receipt.lineItems()).containsExactlyElementsOf(expectedItems);
+    }
 }
