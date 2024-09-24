@@ -13,12 +13,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 
 public class OrderCoffeeSteps {
 
-    ProductCatalog catalog = new ProductCatalog();
-    CoffeeShop coffeeShop = new CoffeeShop(catalog);
+    final ProductCatalog catalog = new ProductCatalog();
+    final CoffeeShop coffeeShop = new CoffeeShop(catalog);
     Customer customer;
     Order order;
 
@@ -67,6 +68,7 @@ public class OrderCoffeeSteps {
     }
 
     @DataTableType
+    @SuppressWarnings("unused")
     public OrderItem orderItem(Map<String, String> row) {
         return new OrderItem(row.get("Product"), Integer.parseInt(row.get("Quantity")));
     }
@@ -82,12 +84,18 @@ public class OrderCoffeeSteps {
 
     @And("the order should contain {int} line items")
     public void theOrderShouldContainLineItems(int expectedNumberOfLineItems) {
+        if (coffeeShop.getOrderFor(customer).isEmpty()) {
+            fail("Order not found");
+        }
         var order = coffeeShop.getOrderFor(customer).get();
         assertThat(order.getItems()).hasSize(expectedNumberOfLineItems);
     }
 
     @And("the order should contain the following products:")
     public void order_should_contain_following_products(List<String> expectedProducts) {
+        if (coffeeShop.getOrderFor(customer).isEmpty()) {
+            fail("Order not found");
+        }
         var order = coffeeShop.getOrderFor(customer).get();
         List<String> productItems = order.getItems().stream()
                 .map(OrderItem::product)
@@ -96,6 +104,7 @@ public class OrderCoffeeSteps {
     }
 
     @DataTableType
+    @SuppressWarnings("unused")
     public ProductPrice productPrice(Map<String, String> row) {
         return new ProductPrice(row.get("Product"), Double.parseDouble(row.get("Price")));
     }
@@ -124,6 +133,7 @@ public class OrderCoffeeSteps {
     }
 
     @DataTableType
+    @SuppressWarnings("unused")
     public ReceiptLineItem receiptLineItem(Map<String, String> dataItem) {
         return new ReceiptLineItem(dataItem.get("Product"),
                 Integer.parseInt(dataItem.get("Quantity")),

@@ -20,15 +20,10 @@ public class Order {
         this(items, customer, OrderStatus.Normal, "");
     }
 
-    public Order(List<OrderItem> items, Customer customer, String comment) {
-        this(items, customer, OrderStatus.Normal, comment);
-    }
-
     public Order(List<OrderItem> items, Customer customer, OrderStatus status, String comment) {
         this(items, customer, status, comment, ORDER_NUMBERS.incrementAndGet());
     }
-
-
+    
     public Order(List<OrderItem> items, Customer customer, OrderStatus status, String comment, long orderNumber) {
         this.items = items;
         this.customer = customer;

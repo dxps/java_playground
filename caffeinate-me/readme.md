@@ -7,7 +7,7 @@ Serenity strongly encourages good test automation design, and supports several d
 The latest version of Serenity supports Cucumber 5.5.
 
 ## The caffeinateme project
-The best place to start with Serenity and Cucumber is to clone or download the caffeinateme project on Github ([https://github.com/serenity-bdd/serenity-cucumber-starter](https://github.com/serenity-bdd/serenity-cucumber-starter)). This project gives you a basic project setup, along with some sample tests and supporting classes. There are two versions to choose from. The master branch uses a more classic approach, using action classes and lightweight page objects, whereas the **[screenplay](https://github.com/serenity-bdd/serenity-cucumber-starter/tree/screenplay)** branch shows the same sample test implemented using Screenplay.
+The best place to start with Serenity and Cucumber is to clone or download the caffeinateme project on GitHub ([https://github.com/serenity-bdd/serenity-cucumber-starter](https://github.com/serenity-bdd/serenity-cucumber-starter)). This project gives you a basic project setup, along with some sample tests and supporting classes. There are two versions to choose from. The master branch uses a more classic approach, using action classes and lightweight page objects, whereas the **[screenplay](https://github.com/serenity-bdd/serenity-cucumber-starter/tree/screenplay)** branch shows the same sample test implemented using Screenplay.
 
 ### The project directory structure
 The project has build scripts for both Maven and Gradle, and follows the standard directory structure used in most Serenity projects:
@@ -84,7 +84,7 @@ public class LookForInformation {
 }
 ```
 
-In Screenplay, we keep track of locators in light weight page or component objects, like this one:
+In Screenplay, we keep track of locators in lightweight page or component objects, like this one:
 ```java
 class SearchForm {
     static Target SEARCH_FIELD = Target.the("search field")
@@ -97,7 +97,7 @@ The Screenplay DSL is rich and flexible, and well suited to teams working on lar
 
 ### The Action Classes implementation.
 
-A more imperative-style implementation using the Action Classes pattern can be found in the `action-classes` branch. The glue code in this version looks this this:
+A more imperative-style implementation using the Action Classes pattern can be found in the `action-classes` branch. The glue code in this version looks this:
 
 ```java
     @Given("^(?:.*) is researching things on the internet")

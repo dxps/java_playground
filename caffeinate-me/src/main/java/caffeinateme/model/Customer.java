@@ -1,17 +1,18 @@
 package caffeinateme.model;
 
+import lombok.Getter;
+
 import java.util.Objects;
 
 public class Customer {
-    private String name;
+
+    @Getter
+    private final String name;
+
     private Integer distanceInMetres = 10000;
 
     public Customer(String name) {
         this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public static Customer named(String name) {
@@ -27,7 +28,7 @@ public class Customer {
     }
 
     public static class CustomerOrderBuilder {
-        private Order order;
+        private final Order order;
         private final Integer distanceInMetres;
 
         public CustomerOrderBuilder(Order order, Integer distanceInMetres) {
@@ -52,4 +53,5 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(name);
     }
+
 }

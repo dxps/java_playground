@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ProductCatalog {
 
-    List<ProductPrice> catalog = new ArrayList<>();
+    final List<ProductPrice> catalog = new ArrayList<>();
 
     public void addProductsWithPrices(List<ProductPrice> productPrices) {
         catalog.addAll(productPrices);
