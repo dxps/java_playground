@@ -163,6 +163,15 @@
                 <configuration>
                     <tags>${tags}</tags>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>check-gherkin</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>check-gherkin</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <dependencies>
                     <dependency>
                         <groupId>net.serenity-bdd</groupId>
