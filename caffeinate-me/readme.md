@@ -4,7 +4,7 @@ Serenity BDD is a library that makes it easier to write high quality automated a
 
 Serenity strongly encourages good test automation design, and supports several design patterns, including classic Page Objects, the newer Lean Page Objects/ Action Classes approach, and the more sophisticated and flexible Screenplay pattern.
 
-The latest version of Serenity supports Cucumber 5.5.
+Serenity version 4.2.1 supports Cucumber 7.18.1.
 
 ## The caffeinateme project
 The best place to start with Serenity and Cucumber is to clone or download the caffeinateme project on GitHub ([https://github.com/serenity-bdd/serenity-cucumber-starter](https://github.com/serenity-bdd/serenity-cucumber-starter)). This project gives you a basic project setup, along with some sample tests and supporting classes. There are two versions to choose from. The master branch uses a more classic approach, using action classes and lightweight page objects, whereas the **[screenplay](https://github.com/serenity-bdd/serenity-cucumber-starter/tree/screenplay)** branch shows the same sample test implemented using Screenplay.
@@ -39,6 +39,9 @@ Feature: Search by keyword
 ### The Screenplay implementation
 The sample code in the master branch uses the Screenplay pattern. The Screenplay pattern describes tests in terms of actors and the tasks they perform. Tasks are represented as objects performed by an actor, rather than methods. This makes them more flexible and composable, at the cost of being a bit more wordy. Here is an example:
 ```java
+package caffeinateme.stepdefinitions;
+public class SearchStepDefinitions {
+    
     @Given("{actor} is researching things on the internet")
     public void researchingThings(Actor actor) {
         actor.wasAbleTo(NavigateTo.theWikipediaHomePage());
@@ -57,6 +60,8 @@ The sample code in the master branch uses the Screenplay pattern. The Screenplay
                 Ensure.that(WikipediaArticle.HEADING).hasText(term)
         );
     }
+    
+}
 ```
 
 Screenplay classes emphasise reusable components and a very readable declarative style, whereas Lean Page Objects and Action Classes (that you can see further down) opt for a more imperative style.
@@ -87,9 +92,7 @@ public class LookForInformation {
 In Screenplay, we keep track of locators in lightweight page or component objects, like this one:
 ```java
 class SearchForm {
-    static Target SEARCH_FIELD = Target.the("search field")
-                                       .locatedBy("#searchInput");
-
+    final static Target SEARCH_FIELD = Target.the("search field").locatedBy("#searchInput");
 }
 ```
 
@@ -100,6 +103,9 @@ The Screenplay DSL is rich and flexible, and well suited to teams working on lar
 A more imperative-style implementation using the Action Classes pattern can be found in the `action-classes` branch. The glue code in this version looks this:
 
 ```java
+package caffeinateme;
+public class OrderCoffeeSteps {
+
     @Given("^(?:.*) is researching things on the internet")
     public void i_am_on_the_Wikipedia_home_page() {
         navigateTo.theHomePage();
@@ -114,6 +120,8 @@ A more imperative-style implementation using the Action Classes pattern can be f
     public void all_the_result_titles_should_contain_the_word(String term) {
         assertThat(searchResult.displayed()).contains(term);
     }
+
+}
 ```
 
 These classes are declared using the Serenity `@Steps` annotation, shown below:
@@ -192,21 +200,23 @@ The main advantage of the approach used in this example is not in the lines of c
 To run the sample project, you can either just run the `CucumberTestSuite` test runner class, or run either `mvn verify` or `gradle test` from the command line.
 
 By default, the tests will run using Chrome. You can run them in Firefox by overriding the `driver` system property, e.g.
-```json
+```shell
 $ mvn clean verify -Ddriver=firefox
 ```
 Or
-```json
+```shell
 $ gradle clean test -Pdriver=firefox
 ```
 
 The test results will be recorded in the `target/site/serenity` directory.
 
 ## Simplified WebDriver configuration and other Serenity extras
+
 The sample projects both use some Serenity features which make configuring the tests easier. In particular, Serenity uses the `serenity.conf` file in the `src/test/resources` directory to configure test execution options.  
+
 ### Webdriver configuration
 The WebDriver configuration is managed entirely from this file, as illustrated below:
-```java
+```
 webdriver {
     driver = chrome
 }
@@ -222,7 +232,7 @@ Serenity uses WebDriverManager to download the WebDriver binaries automatically 
 
 ### Environment-specific configurations
 We can also configure environment-specific properties and options, so that the tests can be run in different environments. Here, we configure three environments, __dev__, _staging_ and _prod_, with different starting URLs for each:
-```json
+```
 environments {
   default {
     webdriver.base.url = "https://duckduckgo.com"
@@ -240,7 +250,7 @@ environments {
 ```
 
 You use the `environment` system property to determine which environment to run against. For example to run the tests in the staging environment, you could run:
-```json
+```shell
 $ mvn clean verify -Denvironment=staging
 ```
 
