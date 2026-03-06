@@ -9,7 +9,7 @@
  * - It is not "collision-proof" across the whole world by itself.<br/>
  * - Operational discipline around node ID assignment still matters.
  */
-public final class Snowflake {
+public class Snowflake {
 
     /*
      * Bit layout: 41 bits timestamp delta | 5 bits datacenter | 5 bits worker | 12 bits sequence
