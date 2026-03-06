@@ -1,0 +1,13 @@
+<archetype>
+
+  <id>snowflake-id</id>
+
+  <sources>
+    <source>src/main/java/Main.java</source>
+  </sources>
+
+  <testSources>
+    <source>src/test/java/SnowflakeTest.java</source>
+  </testSources>
+
+</archetype>
